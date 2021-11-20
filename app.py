@@ -2,6 +2,7 @@ from __future__ import division, print_function
 
 import numpy as np
 import pandas as pd
+import joblib as joblib
 
 # Flask utils
 from flask import Flask, redirect, url_for, request, render_template, jsonify
