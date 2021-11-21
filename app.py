@@ -12,6 +12,7 @@ app = Flask(__name__)
 ratingsMatrix = joblib.load('user_rating.pkl')
 productClass = joblib.load('sentiment_class.pkl')
 
+headings = ("recommendations:")
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -36,7 +37,7 @@ def predict():
                 idx += 1
 
 
-            return render_template('index.html', items_list=top5)
+            return render_template('index.html', headings = headings, items_list=top5)
         except Exception:
             return render_template('index.html', items_list="User doesn't exist")
     else:
