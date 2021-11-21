@@ -12,6 +12,8 @@ app = Flask(__name__)
 ratingsMatrix = joblib.load('user_rating.pkl')
 productClass = joblib.load('sentiment_class.pkl')
 
+headings = ("name")
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -27,13 +29,13 @@ def predict():
                 top20[itmName] = productClass.loc[itmName][0]
 
             top5 = list(top20.sort_values(ascending=False)[:5].index)
-            #res = ""
-            #idx = 1
-            #for itm in top5:
-            #    res += "({0}) {1}\n\n".format(idx, itm)
-            #    idx += 1
+            res = ""
+            idx = 1
+            for itm in top5:
+                res += "({0}) {1}\n\n".format(idx, itm)
+                idx += 1
 
-            return render_template('index.html', items_list=top5)
+            return render_template('index.html', headings=headings, items_list="Top 5 are {0}".format(res))
         except Exception:
             return render_template('index.html', items_list="User doesn't exist")
     else:
