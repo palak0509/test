@@ -26,7 +26,14 @@
 
    <br>
    <br>
+
      {{ items_list }}
+
+     text=items.split("\n")
+     {% for para in text %}
+     <p>{{para}}</p>
+     {% endfor %}
+
 
  </div>
 
