@@ -16,7 +16,7 @@ productClass = joblib.load('sentiment_class.pkl')
 def home():
     return render_template('index.html')
 
-@app.route("/predict", methods=['POST'])
+@app.route("/predict", methods=['GET', POST'])
 def predict():
     if (request.method == 'POST'):
         formVals = [x for x in request.form.values()]
@@ -27,13 +27,13 @@ def predict():
                 top20[itmName] = productClass.loc[itmName][0]
 
             top5 = list(top20.sort_values(ascending=False)[:5].index)
-            res = ""
-            idx = 1
-            for itm in top5:
-                res += "({0}) {1}\n\n".format(idx, itm)
-                idx += 1
+            #res = ""
+            #idx = 1
+            #for itm in top5:
+            #    res += "({0}) {1}\n\n".format(idx, itm)
+            #    idx += 1
 
-            return render_template('index.html', items_list="Top 5 are {0}".format(res))
+            return render_template('index.html', items_list=top5)
         except Exception:
             return render_template('index.html', items_list="User doesn't exist")
     else:
