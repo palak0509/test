@@ -27,20 +27,17 @@ def predict():
             for itmName in list(top20.index):
                 top20[itmName] = productClass.loc[itmName][0]
             #top5 = []
-            top5rec = list(top20.sort_values(ascending=False)[:5].index)
-            #res = ""
+            top5 = list(top20.sort_values(ascending=False)[:5].index)
+            res = ""
             idx = 1
-            for itm in top5rec:
-                res.append(itm)
-                #res = itm
-                #res += "({0}) {1}\n\n".format(idx, itm)
+            for itm in top5:
+                res += "({0}): {1} \n \n".format(idx, itm)
                 idx += 1
 
-
-            return render_template('index.html', items_list=res)
+            return render_template('index.html', items_list="Top 5 recommendations are:  {0}".format(res))
         except Exception:
             return render_template('index.html', items_list="User doesn't exist")
-    else:
+    else
         return render_template('index.html')
 
 if __name__ == '__main__':
