@@ -126,23 +126,18 @@
      
         </div>
     </nav>
-
-    <div class="container" style="margin-top:30px">
-        <p class="display-7">Recommended 5 products based on the entered user name will appear here :</p>
-        <div class="jumbotron">
-            <div class="form-row mb-3">
-                <label >
-                
-                <span class="label username"> User Name</span>
-
-        </label>
-                <div class="col-lg-7">
-                    <input class="form-control basic" type="text" autocomplete="off" >
-
-                </div>
-                <div class="col-lg-3">
-                
-                <button type="button" id="search" class="btn btn-block btn-outline-secondary basicAutoCompleteShowBtn">
+ <div class="login">
+	<h2 style="text-align:center">Sentiment Based Product based Recommendation System</h2>
+     <h3 style="text-align:center">By Palak Kakkar</h3>
+    <form align="center" action="{{ url_for('predict')}}" method="post">
+        <h4>Enter the user name</h4>
+    	<input type="text" style="text-align:center" name="user_name" placeholder="user_name" required="required" />
+        <button align="center" type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+    </form>
+   <br>
+   <br>                
+   </div>
+<button type="button" id="search" class="btn btn-block btn-outline-secondary basicAutoCompleteShowBtn">
             Submit 
           </button>
                    
