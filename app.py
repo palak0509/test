@@ -5,7 +5,7 @@ import pandas as pd
 import joblib as joblib
 
 # Flask utils
-from flask import Flask, redirect, url_for, request, render_template, jsonify
+from flask import Flask, redirect, url_for, request, render_template, jsonify, Markup
 
 app = Flask(__name__)
 
@@ -31,10 +31,10 @@ def predict():
             res = ""
             idx = 1
             for itm in top5:
-                res += "({0}): {1} \n \n . \n".format(idx, itm)
+                res += "({0}): {1} <br> ".format(idx, itm)
                 idx += 1
 
-            return render_template('index.html', items_list="Top 5 recommendations are:  {0}".format(res))
+            return render_template('index.html', items_list="Top 5 recommendations for {0} are: <br> {1} ".format(usrName, res))
         except Exception:
             return render_template('index.html', items_list="User doesn't exist")
     else:
