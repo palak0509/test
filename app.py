@@ -30,15 +30,14 @@ def predict():
             top5rec = list(top20.sort_values(ascending=False)[:5].index)
             #res = ""
             idx = 1
-            top5=pd.dataframe(top5rec)
-            #for itm in top5rec:
-             #   top5.append(itm)
+            for itm in top5rec:
+                res.append(itm)
                 #res = itm
                 #res += "({0}) {1}\n\n".format(idx, itm)
-              #  idx += 1
+                idx += 1
 
 
-            return render_template('index.html', headings = headings, items_list=top5)
+            return render_template('index.html', items_list=res)
         except Exception:
             return render_template('index.html', items_list="User doesn't exist")
     else:
