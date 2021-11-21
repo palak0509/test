@@ -26,20 +26,10 @@
 
    <br>
    <br>
-     <table>
-        <tr>
-            {% for header in headings %}
-            <th>{{ header}}</th>
-            {% endfor %}
-        </tr>
-        {% for row in item_list %}
-        <tr>
-            {% for cell in row %}
-            <td> {{cell}} </td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-    </table>
+     {{ items_list }}
+
  </div>
+
+
 </body>
 </html>
