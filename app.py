@@ -2,31 +2,40 @@ from __future__ import division, print_function
 
 import numpy as np
 import pandas as pd
-#import joblib as joblib
+import joblib as joblib
 
 # Flask utils
 from flask import Flask, redirect, url_for, request, render_template, jsonify
-from model import Recommendation
 
-recommend = Recommendation()
-app = Flask(__name__)  # intitialize the flaks app  # common
+app = Flask(__name__)
 
-import os
-from flask import send_from_directory
+ratingsMatrix = joblib.load('user_rating.pkl')
+productClass = joblib.load('sentiment_class.pkl')
 
 @app.route('/')
 def home():
     return render_template('index.html')
 
-@app.route("/", methods=['POST'])
-def home():
-    flag = False
-    data = ""
-    if request.method == 'POST':
-        flag = True
-        user = request.form["userid"]
-        data=recommend.getTopProducts(user)
-        return render_template('index.html', data=data, flag=flag)
+@app.route("/predict", methods=['POST'])
+def predict():
+    if (request.method == 'POST'):
+        formVals = [x for x in request.form.values()]
+        usrName = formVals[0].lower()
+        try:
+            top20 = ratingsMatrix.loc[usrName].sort_values(ascending=False)[0:20]
+            for itmName in list(top20.index):
+                top20[itmName] = productClass.loc[itmName][0]
+
+            top5 = list(top20.sort_values(ascending=False)[:5].index)
+            res = ""
+            idx = 1
+            for itm in top5:
+                res += "({0}) {1}\n\n".format(idx, itm)
+                idx += 1
+
+            return render_template('index.html', items_list="Top 5 are {0}".format(res))
+        except Exception:
+            return render_template('index.html', items_list="User doesn't exist")
     else:
         return render_template('index.html')
 
