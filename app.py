@@ -28,15 +28,15 @@ def predict():
             for itmName in list(top20.index):
                 top20[itmName] = productClass.loc[itmName][0]
 
-            top5 = list(top20.sort_values(ascending=False)[:5].index)
-	        top5rec = pd.DataFrame(top5)
+            top5 = top20.sort_values(ascending=False)[:5].index
+	        #top5rec = pd.DataFrame(top5)
             #res = ""
             #idx = 1
             #for itm in top5:
             #    res += "({0}) {1}\n\n".format(idx, itm)
             #    idx += 1
 
-            return render_template('index.html', headings=headings, items_list="top5rec")
+            return render_template('index.html', headings=headings, items_list=top5)
         except Exception:
             return render_template('index.html', items_list="User doesn't exist")
     else:
