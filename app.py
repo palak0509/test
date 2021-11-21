@@ -26,15 +26,16 @@ def predict():
             top20 = ratingsMatrix.loc[usrName].sort_values(ascending=False)[0:20]
             for itmName in list(top20.index):
                 top20[itmName] = productClass.loc[itmName][0]
-            top5 = []
+            #top5 = []
             top5rec = list(top20.sort_values(ascending=False)[:5].index)
             #res = ""
             idx = 1
-            for itm in top5rec:
-                top5.append(itm)
+            top5=pd.dataframe(top5rec)
+            #for itm in top5rec:
+             #   top5.append(itm)
                 #res = itm
                 #res += "({0}) {1}\n\n".format(idx, itm)
-                idx += 1
+              #  idx += 1
 
 
             return render_template('index.html', headings = headings, items_list=top5)
