@@ -31,7 +31,7 @@ def predict():
             res = ""
             idx = 1
             for itm in top5:
-                res += '({0}): {1} <br/> '.format(idx, itm)
+                res += markup('({0}): {1} <br/> '.format(idx, itm))
                 idx += 1
 
             return render_template('index.html', items_list='Top 5 recommendations for {0} are: <br/> {1} '.format(usrName, res))
