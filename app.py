@@ -16,7 +16,7 @@ productClass = joblib.load('sentiment_class.pkl')
 def home():
     return render_template('index.html')
 
-@app.route("/predict", methods=['GET', POST'])
+@app.route("/predict", methods=['POST'])
 def predict():
     if (request.method == 'POST'):
         formVals = [x for x in request.form.values()]
