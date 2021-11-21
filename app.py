@@ -37,7 +37,7 @@ def predict():
             return render_template('index.html', items_list="Top 5 recommendations are:  {0}".format(res))
         except Exception:
             return render_template('index.html', items_list="User doesn't exist")
-    else
+    else:
         return render_template('index.html')
 
 if __name__ == '__main__':
