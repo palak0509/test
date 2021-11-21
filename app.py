@@ -33,7 +33,7 @@ def predict():
                 res += "({0}) {1}\n\n".format(idx, itm)
                 idx += 1
 
-            return render_template('index.html', data="Top 5 are {0}".format(res))
+            return render_template('index.html', items_list="Top 5 are {0}".format(res))
         except Exception:
             return render_template('index.html', items_list="User doesn't exist")
     else:
